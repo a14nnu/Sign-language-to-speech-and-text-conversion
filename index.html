@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ISL Vision | AI Interpreter</title>
+    <style>
+        :root { --cream: #FFFDF5; --sky-blue: #E3F2FD; --dark-blue: #1565C0; }
+        body { font-family: 'Segoe UI', sans-serif; background-color: var(--cream); margin: 0; display: flex; height: 100vh; overflow: hidden;}
+        .sidebar { width: 300px; background: white; padding: 25px; box-shadow: 4px 0 15px rgba(0,0,0,0.05); border-right: 2px solid var(--sky-blue); }
+        .sidebar h2 { color: var(--dark-blue); font-size: 1.4rem; border-bottom: 3px solid var(--sky-blue); padding-bottom: 10px; }
+        .gesture-card { background: var(--sky-blue); padding: 10px; margin-bottom: 8px; border-radius: 10px; display: flex; align-items: center; font-weight: 600; color: var(--dark-blue); font-size: 0.85rem;}
+        .emoji { font-size: 1.3rem; margin-right: 12px; }
+        .main { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; background: radial-gradient(circle, #ffffff, #f0f7ff); }
+        .video-wrapper { background: white; padding: 12px; border-radius: 25px; box-shadow: 0 15px 40px rgba(0,0,0,0.12); border: 2px solid var(--sky-blue); position: relative; min-width: 720px; min-height: 480px; display: flex; align-items: center; justify-content: center; }
+        #camera-feed { border-radius: 15px; background: #000; display: none; }
+        .start-btn { padding: 15px 40px; font-size: 1.2rem; background: var(--dark-blue); color: white; border: none; border-radius: 50px; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 15px rgba(21, 101, 192, 0.4); }
+        .start-btn:hover { background: #0d47a1; transform: scale(1.05); }
+        .title { text-align: center; margin-bottom: 20px; color: var(--dark-blue); }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h2>15 Sign Library</h2>
+        <div class="gesture-card"><span class="emoji">🖐️</span>HELLO / PLEASE</div>
+        <div class="gesture-card"><span class="emoji">🙏</span>THANK YOU</div>
+        <div class="gesture-card"><span class="emoji">🤟</span>I LOVE YOU</div>
+        <div class="gesture-card"><span class="emoji">✊</span>YES (FIST) / ❌ NO</div>
+        <div class="gesture-card"><span class="emoji">👍</span>GOOD / 👌 OK</div>
+        <div class="gesture-card"><span class="emoji">🏠</span>HOUSE / ⏰ TIME</div>
+        <div class="gesture-card"><span class="emoji">🆘</span>HELP / 💧 WATER</div>
+        <div class="gesture-card"><span class="emoji">▶️</span>PLAY / 🏆 WIN / 😔 SORRY</div>
+    </div>
+    <div class="main">
+        <div class="title">
+            <h1 style="margin:0">Sign Speak AI : Gesture Recognition</h1>
+            <p style="margin:5px 0 0; opacity: 0.7;">Bridges the gap between hand getures and speech using computer vision</p>
+        </div>
+        <div class="video-wrapper">
+            <button id="start-btn" class="start-btn" onclick="startCamera()">🚀 START CAMERA</button>
+            <img id="camera-feed" src="" width="720" height="480">
+        </div>
+    </div>
+
+    <script>
+        function startCamera() {
+            const btn = document.getElementById('start-btn');
+            const feed = document.getElementById('camera-feed');
+            
+            // Hide button and show camera
+            btn.style.display = 'none';
+            feed.style.display = 'block';
+            
+            // Set the source to start the stream
+            feed.src = "{{ url_for('video_feed') }}";
+        }
+    </script>
+</body>
+</html>
